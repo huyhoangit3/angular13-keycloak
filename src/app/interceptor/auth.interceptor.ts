@@ -10,7 +10,6 @@ import { from, lastValueFrom, Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class AuthInterceptor implements HttpInterceptor {
-  authToken!: string
 
   constructor(private keycloakService: KeycloakService) {}
 
@@ -30,7 +29,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     const authReq = req.clone({
       setHeaders: {
-        Authorization: authToken
+        Authorization: 'Bearer ' + authToken
       }
     })
 

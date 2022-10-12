@@ -1,16 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { ProfileRoutingModule } from './profile-routing.module';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { ProfileRoutingModule } from './profile-routing.module';
 
 @NgModule({
   declarations: [EditProfileComponent],
-  imports: [
-    CommonModule,
-    ProfileRoutingModule,
-  ],
+  imports: [CommonModule, ProfileRoutingModule],
 })
-export class ProfileModule { }
+export class ProfileModule {}
