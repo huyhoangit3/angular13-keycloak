@@ -6,16 +6,12 @@ import { AppComponent } from './app.component';
 
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak } from '../app/utility/app.init';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {AuthInterceptor} from '../app/interceptor/auth.interceptor'
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    KeycloakAngularModule
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, KeycloakAngularModule, HttpClientModule],
   providers: [
     {
       provide: APP_INITIALIZER,
@@ -23,7 +19,12 @@ import { initializeKeycloak } from '../app/utility/app.init';
       multi: true,
       deps: [KeycloakService],
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

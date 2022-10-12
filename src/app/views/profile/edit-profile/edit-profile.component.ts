@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 
@@ -10,14 +11,16 @@ export class EditProfileComponent implements OnInit {
 
   user = '';
 
-  constructor(private keycloakService: KeycloakService) { }
+  constructor(private keycloakService: KeycloakService,
+    private http: HttpClient) { }
 
   ngOnInit(): void {
     this.initializeUserOptions();
   }
 
-  private initializeUserOptions(): void {
+  private async initializeUserOptions() {
     this.user = this.keycloakService.getUsername();
+    this.http.get('http://localhost:9090/demo/hm').subscribe(data => console.log(data));
   }
 
   logout(): void {
